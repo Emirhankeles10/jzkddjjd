@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Embed Video Player</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    height: 100%;
+  }
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border: none;
+  }
+  video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: black;
+  }
+  /* Diğer CSS’lerin aynı kalabilir */
+</style>
+</head>
+<body>
+<div class="video-container">
+  <video id="video" controls playsinline>
+    <source id="videoSource" src="" type="video/mp4" />
+    Tarayıcınız video etiketini desteklemiyor.
+  </video>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoUrl = urlParams.get('src');
+  if (videoUrl) {
+    document.getElementById("videoSource").src = decodeURIComponent(videoUrl);
+    document.getElementById("video").load();
+  } else {
+    document.body.innerHTML = "<p style='color:red;text-align:center;margin-top:20px;'>Video URL bulunamadı.</p>";
+  }
+</script>
+</body>
+</html>
